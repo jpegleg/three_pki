@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+gensecp () {
+  openssl ecparam -name secp384r1 -genkey -noout -out secp384r1.pem
+  openssl ec -in secp384r1.pem -pubout -out secp384r1.pub
+}
+
+selfgen () {
+  gensecp
+  cp secp384r1.pem ca.key
+  HASH=$(echo $(date +%Y%m%d%H%M%S%N)_$(echo -n $RANDOM) | tr -d '\n' | b2sum | cut -c1-32)
+  openssl req -new -x509 -key ./ca.key -out ./ca.crt -days 13653 -subj "/C=US/ST=XX/L=CloudDeploy/O=MyOrg/OU=DevSecOps/CN=$HASH"
+  openssl x509 -req -days 90 -in /opt/jwt/webtmp/CSR.csr -CA ca.crt -CAkey ca.key -CAcreateserial -sha256
+}
+
+cd /opt/jwt/workspace/ || exit 1
+gensecp || exit 1
+selfgen || exit 1
