@@ -120,8 +120,6 @@ pub async fn user2_handler(uid: String) -> WebResult<impl Reply> {
     use chrono::DateTime;
     use chrono::Utc;
     let handler_date: DateTime<Utc> = Utc::now();
-    let mut data = item.unwrap();
-    file.write_all(data.to_bytes().as_ref());
     let output = Command::new("bash")
       .arg("-c")
       .arg("./signcsr")
