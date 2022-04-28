@@ -15,3 +15,5 @@ selfgen () {
 cd /opt/jwt/workspace/ || exit 1
 gensecp || exit 1
 selfgen || exit 1
+cat ca.crt >> auth.pem
+:>ca.key
