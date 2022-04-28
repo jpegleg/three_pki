@@ -33,7 +33,7 @@ pub async fn handle_rejection(err: Rejection) -> std::result::Result<impl Reply,
     use chrono::DateTime;
     use chrono::Utc;
     let dato: DateTime<Utc> = Utc::now();
-    eprintln!("{} - fixadm_service ERRO - error: {:?}", dato, err);
+    eprintln!("{} - three_service ERRO - error: {:?}", dato, err);
     let (code, message) = if err.is_not_found() {
         (StatusCode::NOT_FOUND, "Not Found".to_string())
     } else if let Some(e) = err.find::<Error>() {
