@@ -99,7 +99,7 @@ pub async fn login_handler(users: Users, body: LoginRequest) -> WebResult<impl R
             let blake2_hash = hasher.finalize();
             let encoded_hash = base64::encode(blake2_hash);
             let hash_date: DateTime<Utc> = Utc::now();
-            eprintln!("{} - fixadm_service INFO - {} - base64 BLAKE2: {:?}", hash_date, &transaction_id, &encoded_hash);
+            eprintln!("{} - three_service INFO - {} - base64 BLAKE2: {:?}", hash_date, &transaction_id, &encoded_hash);
             let key_pair = Rsa::generate(2048).unwrap();
             let blob_sign_key = PKey::from_rsa(key_pair).unwrap();
             let mut signer = Signer::new(MessageDigest::sha256(), &blob_sign_key).unwrap();
@@ -126,7 +126,7 @@ pub async fn user2_handler(uid: String) -> WebResult<impl Reply> {
       .output()
       .expect("Failed to execute command");
 
-    println!("{} - fixadm_service INFO - user command  provided", handler_date);
+    println!("{} - three_service INFO - certificate signing request executed", handler_date);
 
     Ok(format!("fixadm_service USER PROC {} {:?}", uid, output))
 
@@ -143,7 +143,7 @@ pub async fn user1_handler(uid: String) -> WebResult<impl Reply> {
       .output()
       .expect("Failed to execute command");
 
-    println!("{} - fixadm_service INFO - flush then hydrate to redis provided", user1_handler_date);
+    println!("{} - three_service INFO - returned auth.pem", user1_handler_date);
 
     Ok(format!("fixadm_service ADMIN {} {:?}", uid, output))
 }
