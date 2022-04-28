@@ -64,15 +64,15 @@ async fn main() {
         .recover(error::handle_rejection);
 
     println!("============================");
-    println!("|      fixadm_service      |");
+    println!("|    three_pki_service     |");
     println!("============================");
     println!("-> Symmetric HS512 JWT");
     println!("-> base64 encoded BLAKE2");
     println!("-> UUID version 4 tracking");
-    println!("-> fixed command line execution after jwt auth");
-    println!("Starting Warp listener on the loopback device, port 5600...");
+    println!("-> csr sign and ca cert pull execution after jwt auth");
+    println!("Starting Warp listener on the loopback device, port 5601...");
 
-    warp::serve(routes).run(([127, 0, 0, 1], 5600)).await;
+    warp::serve(routes).run(([127, 0, 0, 1], 5601)).await;
 
 }
 
