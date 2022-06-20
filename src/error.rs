@@ -54,7 +54,7 @@ pub async fn handle_rejection(err: Rejection) -> std::result::Result<impl Reply,
         )
     } else {
         let datu: DateTime<Utc> = Utc::now();
-        eprintln!("{} - fixadm_service ERRO - error: {:?}", datu, err);
+        eprintln!("{} - three_service ERRO - error: {:?}", datu, err);
         (
             StatusCode::INTERNAL_SERVER_ERROR,
             "Internal Server Error".to_string(),
