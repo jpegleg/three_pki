@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-cat auth.pem
+cat /opt/jwt/workspace/auth.pem | xxd -p | tr -d '\n'
