@@ -85,7 +85,7 @@ pub async fn login_handler(users: Users, body: LoginRequest) -> WebResult<impl R
     use chrono::Utc;
     let login_date: DateTime<Utc> = Utc::now();
     let transaction_id = Uuid::new_v4();
-    println!("{} - fixadm_service INFO - START JWT usage UID {}", login_date, &transaction_id);
+    println!("{} - three_service INFO - START JWT usage UID {}", login_date, &transaction_id);
 
     match users
         .iter()
