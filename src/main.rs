@@ -128,7 +128,7 @@ pub async fn user2_handler(uid: String) -> WebResult<impl Reply> {
 
     println!("{} - three_service INFO - certificate signing request executed", handler_date);
 
-    Ok(format!("fixadm_service USER PROC {} {:?}", uid, output))
+    Ok(format!("three_service USER PROC {} {:?}", uid, output))
 
 }
 
@@ -145,7 +145,7 @@ pub async fn user1_handler(uid: String) -> WebResult<impl Reply> {
 
     println!("{} - three_service INFO - returned auth.pem", user1_handler_date);
 
-    Ok(format!("fixadm_service ADMIN {} {:?}", uid, output))
+    Ok(format!("three_service ADMIN {} {:?}", uid, output))
 }
 
 fn init_users() -> HashMap<String, User> {
