@@ -9,7 +9,7 @@ selfgen () {
   cp secp384r1.pem ca.key
   HASH=$(echo $(date +%Y%m%d%H%M%S%N)_$(echo -n $RANDOM) | tr -d '\n' | b2sum | cut -c1-32)
   openssl req -new -x509 -key ./ca.key -out ./ca.crt -days 13653 -subj "/C=US/ST=XX/L=CloudDeploy/O=MyOrg/OU=DevSecOps/CN=$HASH"
-  openssl x509 -req -days 90 -in /opt/jwt/webtmp/CSR.csr -CA ca.crt -CAkey ca.key -CAcreateserial -sha256
+  openssl x509 -req -days 90 -in /opt/jwt/webtmp/CSR.csr -CA ca.crt -CAkey ca.key -CAcreateserial -sha256 | xxd -p | tr -d '\n'
 }
 
 cd /opt/jwt/workspace/ || exit 1
