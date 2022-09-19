@@ -1,0 +1,21 @@
+protean_build() {
+  rm -rf osprey_validator 2>/dev/null && git clone https://github.com/jpegleg/osprey_validator
+  bash osprey_validator/docker/osprey_2/generate_crypt
+  rm -rf osprey_validator
+  ls auth.pem || exit 1
+  ls identity.pem || exit 1
+  openssl x509 -in identity.pem -text -noout
+  echo "The build detected the following files: $(sha256sum auth.pem identity.pem keycert.pem)"
+  ~/.cargo/bin/cargo check || exit 1
+}
+
+protean_test() {
+  ~/.cargo/bin/cargo doc
+  rm -rf ../static/three-docs/
+  mv target/doc ../static/three-docs
+  ~/.cargo/bin/cargo clippy
+  ~/.cargo/bin/cargo clean
+  trivy image "localhost:5000/three_pki:test" > ../three_trivy-report_$(date +%Y%m%d%H%M%S).txt
+  docker-compose up -d
+
+}
