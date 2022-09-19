@@ -8,6 +8,4 @@ protean_test() {
   mv target/doc ../static/three-docs
   ~/.cargo/bin/cargo clippy
   ~/.cargo/bin/cargo clean
-  trivy image "localhost:5000/three_pki:test" > ../three_trivy-report_$(date +%Y%m%d%H%M%S).txt
-  docker-compose up -d
 }
